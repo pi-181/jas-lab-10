@@ -13,15 +13,15 @@ namespace jaslab5.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Cabins()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Cabins page.";
             return View();
         }
-
-        public ActionResult Contact()
+        
+        public ActionResult Passengers()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Passengers page.";
             return View();
         }
     }
