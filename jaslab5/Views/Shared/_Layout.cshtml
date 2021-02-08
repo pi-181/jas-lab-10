@@ -21,8 +21,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Cabins", "Cabins", "Home")</li>
-                <li>@Html.ActionLink("Passengers", "Passengers", "Home")</li>
+                <li>@Html.ActionLink("Cabins", "Index", "Cabins")</li>
             </ul>
         </div>
     </div>
@@ -31,7 +30,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.2021 - Java & C#: Lab 5</p>
+        <p>&copy; @DateTime.Now.Year - Java & C#: Lab 5</p>
     </footer>
 </div>
 

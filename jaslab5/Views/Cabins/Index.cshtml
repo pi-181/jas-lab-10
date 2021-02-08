@@ -1,0 +1,67 @@
+﻿@model Tuple<IEnumerable<jaslab5.Cabin>, Cabin>
+
+@{
+    ViewBag.Title = "Cabins";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table class="table">
+    <tr>
+        <th>Cabin Name</th>
+        <th>Square</th>
+        <th>Class Name</th>
+        <th>Action</th>
+    </tr>
+    
+@foreach (var item in Model.Item1) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.CabinName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Square)</td>
+        <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Cabins", new { id=item.CabinId }, null) |
+            @Html.ActionLink("Delete", "Delete", "Cabins", new { id=item.CabinId }, null) |
+            @Html.ActionLink("Passengers", "GetByCabin", "Passengers", new { cabinId=item.CabinId }, null)
+        </td>
+    </tr>
+}
+<tr>
+
+@using (Html.BeginForm("PostCabin", "Cabins"))
+{
+    @Html.AntiForgeryToken()
+    
+    var cabin = Model.Item2;
+    @Html.HiddenFor(_ => cabin.CabinId)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => cabin.CabinName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(_ => cabin.CabinName, "", new { @class = "text-danger" })
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => cabin.Square, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(_ => cabin.Square, "", new { @class = "text-danger" })
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => cabin.ClassName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(_ => cabin.ClassName, "", new { @class = "text-danger" })
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@(cabin.CabinId == 0 ? "Add" : "Edit") @cabin.CabinId" class="btn btn-default"/>
+            </div>
+        </div></th>
+    </div>
+}
+</tr>
+
+</table>

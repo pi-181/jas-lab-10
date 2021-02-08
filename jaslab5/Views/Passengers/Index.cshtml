@@ -1,0 +1,72 @@
+﻿@model Tuple<int, IEnumerable<jaslab5.Passenger>, Passenger>
+
+@{
+    ViewBag.Title = "Passengers";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table class="table">
+    <tr>
+        <th>Frist Name</th>
+        <th>Last Name</th>
+        <th>Sex</th>
+        <th>Action</th>
+    </tr>
+    
+@foreach (var item in Model.Item2) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+        <td>@Html.DisplayFor(modelItem => item.Sex)</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", 
+                "Passengers",new { id=item.PassengerId }, null) |
+            @Html.ActionLink("Delete", "Delete", 
+                "Passengers", new { cabinId=Model.Item1, id=item.PassengerId }, null)
+        </td>
+    </tr>
+}
+<tr>
+
+@using (Html.BeginForm("PostPassenger", "Passengers"))
+{
+    @Html.AntiForgeryToken()
+    
+    var cabinId = Model.Item1;
+    var passenger = Model.Item3;
+
+    @Html.HiddenFor(_ => cabinId)
+    @Html.HiddenFor(_ => passenger.PassengerId)
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => passenger.FirstName, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(_ => passenger.FirstName, "", new {@class = "text-danger"})
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => passenger.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(_ => passenger.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(_ => passenger.Sex, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(_ => passenger.Sex, "", new { @class = "text-danger" })
+            </div>
+        </div></th>
+        <th><div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@(passenger.PassengerId == 0 ? "Add" : "Edit") @Model.Item1 @passenger.PassengerId" class="btn btn-default"/>
+            </div>
+        </div></th>
+    </div>
+}
+</tr>
+
+</table>

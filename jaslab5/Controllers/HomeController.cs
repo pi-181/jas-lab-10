@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NHibernate;
 
 namespace jaslab5.Controllers
 {
@@ -10,18 +11,6 @@ namespace jaslab5.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Cabins()
-        {
-            ViewBag.Message = "Cabins page.";
-            return View();
-        }
-        
-        public ActionResult Passengers()
-        {
-            ViewBag.Message = "Passengers page.";
             return View();
         }
     }
