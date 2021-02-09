@@ -23,7 +23,7 @@ namespace jaslab5
             Id(x => x.CabinId, "cabin_id").GeneratedBy.Native();
             
             // Отображение обычного поля на колонку таблицы
-            Map(x => x.CabinName, "cabin_name");
+            Map(x => x.CabinName, "cabin_name").Unique();
             Map(x => x.Square, "square");
             Map(x => x.ClassName, "class_name");
 
