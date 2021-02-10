@@ -20,9 +20,9 @@
         <td>@Html.DisplayFor(modelItem => item.Square)</td>
         <td>@Html.DisplayFor(modelItem => item.ClassName)</td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Cabins", new { id=item.CabinId }, null) |
-            @Html.ActionLink("Delete", "Delete", "Cabins", new { id=item.CabinId }, null) |
-            @Html.ActionLink("Passengers", "GetByCabin", "Passengers", new { cabinId=item.CabinId }, null)
+            @Html.ActionLink("Edit", "Edit", "Cabins", new { id=item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", "Cabins", new { id=item.Id }, null) |
+            @Html.ActionLink("Passengers", "GetByCabin", "Passengers", new { cabinId=item.Id }, null)
         </td>
     </tr>
 }
@@ -33,7 +33,7 @@
     @Html.AntiForgeryToken()
     
     var cabin = Model.Item2;
-    @Html.HiddenFor(_ => cabin.CabinId)
+    @Html.HiddenFor(_ => cabin.Id)
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -57,7 +57,7 @@
         </div></th>
         <th><div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@(cabin.CabinId == 0 ? "Add" : "Edit")" class="btn btn-default"/>
+                <input type="submit" value="@(cabin.Id == 0 ? "Add" : "Edit")" class="btn btn-default"/>
             </div>
         </div></th>
     </div>

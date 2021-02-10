@@ -3,13 +3,17 @@ using FluentNHibernate.Mapping;
 
 namespace jaslab5
 {
-    public class Cabin
+    public abstract class EntityBase
     {
-        public virtual int CabinId { get; set; }
+        public virtual int Id { get; set; }
+    }
+    
+    public class Cabin : EntityBase
+    {
         public virtual string CabinName { get; set; } = "";
         public virtual int Square { get; set; }
         public virtual string ClassName { get; set; } = "";
-        public virtual IList<Passenger> Passengers { get; set; }
+        public virtual IList<Passenger> Passengers { get; set; } = new List<Passenger>();
     }
 
     public class CabinMap : ClassMap<Cabin>
@@ -20,7 +24,7 @@ namespace jaslab5
             Table("cabins");
             
             // Отображение идентификатора на колонку таблицы
-            Id(x => x.CabinId, "cabin_id").GeneratedBy.Native();
+            Id(x => x.Id, "cabin_id").GeneratedBy.Native();
             
             // Отображение обычного поля на колонку таблицы
             Map(x => x.CabinName, "cabin_name").Unique();
@@ -35,9 +39,8 @@ namespace jaslab5
         }
     }
     
-    public class Passenger
+    public class Passenger : EntityBase
     {
-        public virtual int PassengerId { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string Sex { get; set; }
@@ -52,7 +55,7 @@ namespace jaslab5
             Table("passengers");
             
             // Отображение идентификатора на колонку таблицы
-            Id(x => x.PassengerId, "pass_id").GeneratedBy.Native();
+            Id(x => x.Id, "pass_id").GeneratedBy.Native();
             
             // Отображение обычного поля на колонку таблицы
             Map(x => x.FirstName, "first_name");

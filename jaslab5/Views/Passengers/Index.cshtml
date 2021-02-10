@@ -21,9 +21,9 @@
         <td>@Html.DisplayFor(modelItem => item.Sex)</td>
         <td>
             @Html.ActionLink("Edit", "Edit", 
-                "Passengers",new { id=item.PassengerId }, null) |
+                "Passengers",new { id=item.Id }, null) |
             @Html.ActionLink("Delete", "Delete", 
-                "Passengers", new { cabinId=Model.Item1, id=item.PassengerId }, null)
+                "Passengers", new { cabinId=Model.Item1, id=item.Id }, null)
         </td>
     </tr>
 }
@@ -37,7 +37,7 @@
     var passenger = Model.Item3;
 
     @Html.HiddenFor(_ => cabinId)
-    @Html.HiddenFor(_ => passenger.PassengerId)
+    @Html.HiddenFor(_ => passenger.Id)
 
     <div class="form-horizontal">
         <hr />
@@ -62,7 +62,7 @@
         </div></th>
         <th><div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@(passenger.PassengerId == 0 ? "Add" : "Edit")" class="btn btn-default"/>
+                <input type="submit" value="@(passenger.Id == 0 ? "Add" : "Edit")" class="btn btn-default"/>
             </div>
         </div></th>
     </div>

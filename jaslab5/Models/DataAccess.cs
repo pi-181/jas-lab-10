@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 
 namespace jaslab5
 {
-    public interface IGenericDAO<T>
+     public interface IGenericDAO<T>
     {
         void SaveOrUpdate(T item);
 
@@ -55,9 +56,37 @@ namespace jaslab5
         }
     }
 
+    public interface ICabinDAO : IGenericDAO<Cabin>
+    {
+        Cabin GetCabinByName(string name);
+        void RemoveCabinByName(string name);
+    }
+    
     public interface IPassengerDAO : IGenericDAO<Passenger>
     {
-        IEnumerable<Passenger> GetPassengerByCabin(int cabinId);
+        IList<Passenger> GetPassengerByCabin(int cabinId);
+    }
+
+    public class CabinDAO : GenericDAO<Cabin>, ICabinDAO
+    {
+        public CabinDAO(ISession session) : base(session)
+        {
+            
+        }
+        
+        public Cabin GetCabinByName(string name)
+        {
+            return session.CreateSQLQuery(@"SELECT * FROM cabins WHERE cabin_name LIKE :cab_name")
+                .AddEntity("Cabin", typeof(Cabin))
+                .SetParameter("cab_name", name)
+                .List<Cabin>()
+                .FirstOrDefault();
+        }
+
+        public void RemoveCabinByName(string name)
+        {
+            Delete(GetCabinByName(name));
+        }
     }
     
     public class PassengerDAO : GenericDAO<Passenger>, IPassengerDAO
@@ -67,7 +96,7 @@ namespace jaslab5
             
         }
 
-        public IEnumerable<Passenger> GetPassengerByCabin(int cabin_id)
+        public IList<Passenger> GetPassengerByCabin(int cabin_id)
         {
             return session.CreateSQLQuery("SELECT * FROM passengers WHERE cabin_id = " + cabin_id)
                 .AddEntity("Passenger", typeof(Passenger))
@@ -77,7 +106,7 @@ namespace jaslab5
 
     public abstract class DAOFactory
     {
-        public abstract IGenericDAO<Cabin> getCabinDAO();
+        public abstract ICabinDAO getCabinDAO();
         public abstract IPassengerDAO getPassengerDAO();
     }
     
@@ -91,9 +120,9 @@ namespace jaslab5
             this.session = session;
         }
 
-        public override IGenericDAO<Cabin> getCabinDAO() 
+        public override ICabinDAO getCabinDAO() 
         {
-            return new GenericDAO<Cabin>(session);
+            return new CabinDAO(session);
         }
 
         public override IPassengerDAO getPassengerDAO()
