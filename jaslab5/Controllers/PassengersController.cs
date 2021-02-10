@@ -63,7 +63,7 @@ namespace jaslab5.Controllers
                 var p = passDao.GetById(id);
                 
                 var cab = p.Cabin;
-                ViewBag.Message = $"Cabin: {cab.CabinName}. Editing passenger: ${p.FirstName} ${p.LastName}";
+                ViewBag.Message = $"Cabin: {cab.CabinName}. Editing passenger: {p.FirstName} {p.LastName}";
                 
                 return View("Index", new Tuple<int, IEnumerable<Passenger>, Passenger>(
                     cab.Id, new List<Passenger>(passDao.GetPassengerByCabin(cab.Id)), p
