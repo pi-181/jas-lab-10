@@ -50,6 +50,14 @@
           <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="HtmlRenderer.PdfSharp, Version=1.5.0.5, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\HtmlRenderer.PdfSharp.1.5.0.5\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4">
           <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
           <Private>True</Private>
@@ -74,6 +82,14 @@
         </Reference>
         <Reference Include="Npgsql, Version=4.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
           <HintPath>..\packages\Npgsql.4.0.11\lib\net451\Npgsql.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb">
+          <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb">
+          <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b">
@@ -159,6 +175,7 @@
           <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml.Linq" />
         <Reference Include="System.Web" />
         <Reference Include="System.Web.Extensions" />
@@ -194,6 +211,7 @@
         <Compile Include="Models\DataAccess.cs" />
         <Compile Include="Models\Domain.cs" />
         <Compile Include="Models\NHibernateHelper.cs" />
+        <Compile Include="Models\Pdf.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
